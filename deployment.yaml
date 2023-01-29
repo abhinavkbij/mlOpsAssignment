@@ -1,0 +1,19 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "digits-ml-service"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "digits-ml-service"
+  template:
+    metadata:
+      labels:
+        app: "digits-ml-service"
+    spec:
+      containers:
+      - name: "ml-service-preds"
+        image:  "gcr.io/{PROJECT_ID}/{FOLDER}/{IMAGE:TAG}"
+        ports:
+          - containerPort: 80
