@@ -3,4 +3,4 @@ pydantic
 uvicorn
 Pillow
 numpy
-tensorflow==2.9.*
+python-multipart
