@@ -1,10 +1,10 @@
-from typing import Union
-
 from fastapi import FastAPI, UploadFile
 from PIL import Image
 import tensorflow as tf
 import numpy as np
 import io
+
+
 app = FastAPI()
 
 
@@ -12,7 +12,6 @@ app = FastAPI()
 def read_root():
     return {"Hello": "World"}
 
-# request affected by server, maybe nginx doing something, test first on local without tesnorflow, normal docker image of python or even without docker
 @app.post("/identifyDigit")
 async def identifyDigit(imgFile: UploadFile):
     fileContent = await imgFile.read()
@@ -22,7 +21,9 @@ async def identifyDigit(imgFile: UploadFile):
     # convert image to array
     imgArr = np.asarray(img, dtype='uint8')
 
+    # add channel
     imgArr = np.expand_dims(imgArr, axis=2)
+    # add batch dim
     imgArr = np.expand_dims(imgArr, axis=0)
 
     # load model
