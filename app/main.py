@@ -22,11 +22,14 @@ async def identifyDigit(imgFile: UploadFile):
     # convert image to array
     imgArr = np.asarray(img, dtype='uint8')
     print (imgArr.shape)
+    imgArr = np.expand_dims(imgArr, axis=2)
+    imgArr = np.expand_dims(imgArr, axis=0)
+    print (imgArr.shape)
     # imgArr = np.array(imgArr, dtype='uint8')
 
     print (imgArr)
     # load model
-    #model = tf.keras.models.load_model('/code/app/saved_model1/')
+    model = tf.keras.models.load_model('/code/app/saved_model2/')
 
     # get predictions
-    #print (model.predict(imgArr))
+    print (model.predict(imgArr))
